@@ -55,12 +55,17 @@ def spider_pages(start_page):
     results = []
     while True:
         url = 'http://ministryoftextiles.gov.in/whos-who?page=' + str(page)
+        # call get_data function
         person_list = get_data(url)
         if person_list is not None:
             results += person_list
             page += 1
         else:
             break
+    # store results in results.json file
+    with open('results.json', 'w') as outfile:
+        json.dump(results, outfile)
+    # print results
     print(json.dumps(results))
 
 
